@@ -5,15 +5,15 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-apt update && sudo apt upgrade --yes
+apt update && sudo apt upgrade --yes && sudo apt install wget -y
 
-cp ./full-update.fish /bin/full-update.fish
+wget -O - https://raw.githubusercontent.com/Questionable-Research-Labs/automated-computer-setup/main/full-update.fish > /bin/full-update.fish
 chmod +x /bin/full-update.fish
 
-cp ./dev-env-setup.sh /bin/dev-env-setup.sh
+wget -O - https://raw.githubusercontent.com/Questionable-Research-Labs/automated-computer-setup/main/dev-env-setup.sh > /bin/dev-env-setup.sh
 chmod +x /bin/dev-env-setup.sh
 
-cp ./ipa-setup.sh /bin/ipa-setup.sh
+wget -O - https://raw.githubusercontent.com/Questionable-Research-Labs/automated-computer-setup/main/ipa-setup.sh > /bin/ipa-setup.sh
 chmod +x /bin/ipa-setup.sh
 
 
