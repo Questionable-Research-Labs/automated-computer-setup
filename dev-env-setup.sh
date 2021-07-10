@@ -6,8 +6,9 @@ sudo apt-get install -y build-essential libssl-dev cowsay curl xclip
 # Nodejs and NVM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvmsudo nvm install 14.17.3
-sudo nvm use 14.17.3
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvmsudo
+nvm install 14.17.3
+nvm use 14.17.3
 node -v
 
 
@@ -16,14 +17,14 @@ sudo apt-get update
 sudo apt-get install -y git
 
 # Yarn and usefull global packages
-sudo npm install -g yarn
-sudo yarn global add nodemon
-sudo yarn global add loopback-cli
-sudo yarn global add forever
-sudo yarn global add ungit
-sudo yarn global add gulp-cli
-sudo yarn global add generator-angular-fullstack
-sudo yarn global add caprover
+npm install -g yarn
+yarn global add nodemon
+yarn global add loopback-cli
+yarn global add forever
+yarn global add ungit
+yarn global add gulp-cli
+yarn global add generator-angular-fullstack
+yarn global add caprover
 
 # Mongodb, Installing and starting server
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
