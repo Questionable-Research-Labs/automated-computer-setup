@@ -16,7 +16,7 @@
 
 
 # Installing build essentials
-sudo apt-get install -y build-essential libssl-dev cowsay
+sudo apt-get install -y build-essential libssl-dev cowsay curl
 
 # Nodejs and NVM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
@@ -154,7 +154,10 @@ conda config --set auto_activate_base false
 sudo snap install vlc
 
 # VSCode
-sudo snap install code
+sudo snap install code --classic
+
+# bpytop
+sudo apt install bpytop
 
 # Starship Prompt
 
@@ -162,3 +165,8 @@ curl -fsSL https://starship.rs/install.sh > /tmp/installStarship.sh
 sudo sh /tmp/installStarship.sh -y
 rm /tmp/installStarship.sh -f
 
+# Install app image launcher
+
+wget -O - https://github.com/TheAssassin/AppImageLauncher/releases/latest/download/appimagelauncher_2.2.0-travis995.0f91801.bionic_amd64.deb > /tmp/appimagelauncher.deb
+sudo apt install /tmp/appimagelauncher.deb -y
+rm /tmp/appimagelauncher.deb -f
