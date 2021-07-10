@@ -1,29 +1,12 @@
 #!/bin/bash
-# Sojharo's Development Machine Setup on Ubuntu
-# Author : Sojharo
-#
-# set software sources to server for united states
-#
-# For other software:
-## VLC from software center
-## virtual box from software center
-## PDF Mod from software center
-## shutter from software center
-## kazam from software center
-## install unity tweak tool from software center
-## install rebar: pull from github (for building erlang applications)
-## Learn from https://github.com/rafaelstz/simplesh
-
 
 # Installing apt essentials
 sudo apt-get install -y build-essential libssl-dev cowsay curl xclip
 
 # Nodejs and NVM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-sudo nvm install 14.17.3
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvmsudo nvm install 14.17.3
 sudo nvm use 14.17.3
 node -v
 
