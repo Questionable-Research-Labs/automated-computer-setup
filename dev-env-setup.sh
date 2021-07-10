@@ -15,21 +15,32 @@
 ## Learn from https://github.com/rafaelstz/simplesh
 
 
-# Installing build essentials
-sudo apt-get install -y build-essential libssl-dev cowsay curl
+# Installing apt essentials
+sudo apt-get install -y build-essential libssl-dev cowsay curl xclip
 
 # Nodejs and NVM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-source ~/.profile
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 sudo nvm install 14.17.3
 sudo nvm use 14.17.3
 node -v
+
+
+# Git - a version control system
+sudo apt-get update
+sudo apt-get install -y git
 
 # Yarn and usefull global packages
 sudo npm install -g yarn
 sudo yarn global add nodemon
 sudo yarn global add loopback-cli
-sudo yarn global add 
+sudo yarn global add forever
+sudo yarn global add ungit
+sudo yarn global add gulp-cli
+sudo yarn global add generator-angular-fullstack
+sudo yarn global add caprover
 
 # Mongodb, Installing and starting server
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
@@ -39,34 +50,11 @@ sudo apt-get install -y mongodb-org
 sudo service mongod start
 sudo service mongod status
 
-# Forever to run nodejs scripts forever
-sudo yarn global add forever
-
-# Git - a version control system
-sudo apt-get update
-sudo apt-get install -y git xclip
-
-# Grunt - an automated task runner
-sudo npm install -g grunt-cli
-
-# Bower - a dependency manager
-sudo npm install -g bower
-
-# Yeoman - for generators
-sudo npm install -g yo 
-
-
 # maven 
 sudo apt-get install maven -y
 
-# Gulp - an automated task runner
-sudo npm install -g gulp-cli
-
-# Angular FullStack - My favorite MEAN boilerplate (MEAN = MongoDB, Express, Angularjs, Nodejs)
-sudo npm install -g generator-angular-fullstack
-
 # Vim, Curl, Python - Some random useful stuff
-sudo apt-get install -y vim curl python-software-properties
+sudo apt-get install -y vim curl software-properties-common
 sudo apt-get install -y python-dev, python-pip
 sudo apt-get install -y libkrb5-dev
 
@@ -107,9 +95,6 @@ sudo apt-get install -y lib32z1 lib32ncurses5 lib32bz2-1.0 lib32stdc++6
 sudo apt-get install -y rpm
 sudo apt-get install -y alien dpkg-dev debhelper
 
-# Calibre - Ebook reader and converter
-sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
-
 # Dictionary Client and Server with Thesaurus
 sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 sudo apt-get install -y dict
@@ -126,21 +111,27 @@ sudo apt-get install -y dict-moby-thesaurus
 sudo apt install fish
 
 # Docker
-curl -fsSL get.docker.com -o get-docker.sh
-sh get-docker.sh
-# Docker-compose
-sudo pip install docker-compose
-# Atom 
-curl -L https://atom.io/download/deb -o atom-amd64.deb
-sudo dpkg -i atom-amd64.deb
-sudo apt-get -f install
-# Nuclide
-# apm install nuclide
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup-setup.sh
-sh rustup-setup.sh --yes
+sh rustup-setup.sh -y
 rm rustup-setup.sh
+
+cargo install cargo-update
 
 # Anaconda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
