@@ -3,9 +3,6 @@
 # Installing apt essentials
 sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config cowsay uuid-runtime git network-manager-openvpn network-manager-ssh network-manager-pptp proxychains
 
-# Clear apt cache
-sudo apt autoremove
-
 # Install Wine
 sudo dpkg --add-architecture i386
 wget -nc https://dl.winehq.org/wine-builds/winehq.key
@@ -34,8 +31,30 @@ sudo apt-get install -y python-dev, python-pip
 sudo apt-get install -y libkrb5-dev
 
 # Installing JDK and JRE
-sudo apt-get install -y default-jre
-sudo apt-get install -y default-jdk
+sudo apt-get install -y openjdk-17-jre
+sudo apt-get install -y openjdk-17-jdk
+
+# Install Gradle
+sudo apt install gradle -y
+
+# Install Mono
+sudo apt install gnupg ca-certificates
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt update
+
+sudo apt install mono-devel -y
+
+# Install DotNet
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-5.0
+
+# Cura
+sudo snap install cura-slicer
+sudo snap connect cura-slicer:mount-observe
+sudo snap connect cura-slicer:removable-media
 
 # Gimp Image Editor
 sudo apt-get install -y gimp gimp-data gimp-plugin-registry gimp-data-extras
@@ -46,6 +65,11 @@ sudo apt-get install -y unace unrar zip unzip p7zip-full p7zip-rar sharutils rar
 # FileZilla - a FTP client
 sudo apt-get install -y filezilla
 
+# Elxir
+wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb && sudo dpkg -i erlang-solutions_2.0_all.deb
+sudo apt-get update
+sudo apt-get install esl-erlang
+sudo apt-get install elixir
 
 # Erlang - Actor Concurrency Model based Programming Language
 sudo apt-get install -y erlang
@@ -166,3 +190,6 @@ eval "$(starship init bash)"
 wget -O /tmp/appimagelauncher.deb https://github.com/TheAssassin/AppImageLauncher/releases/latest/download/appimagelauncher_2.2.0-travis995.0f91801.bionic_amd64.deb
 sudo apt install /tmp/appimagelauncher.deb -y
 rm /tmp/appimagelauncher.deb -f
+
+# Clear apt cache
+sudo apt autoremove
