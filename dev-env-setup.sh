@@ -130,7 +130,7 @@ sudo snap install termius-app
 sudo snap install bitwarden
 
 # Gitkraken
-sudo snap install gitkraken
+sudo snap install gitkraken --classic
 
 # Discord
 sudo snap install discord
