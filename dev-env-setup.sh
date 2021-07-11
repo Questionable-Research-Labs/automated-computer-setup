@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # Installing apt essentials
-sudo apt-get install -y build-essential libssl-dev cowsay curl xclip
+sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config
+
+# Clear apt cache
+sudo apt autoremove
 
 # Nodejs and NVM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
@@ -27,12 +30,12 @@ yarn global add generator-angular-fullstack
 yarn global add caprover
 
 # Mongodb, Installing and starting server
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-sudo apt-get update
-sudo apt-get install -y mongodb-org
-sudo service mongod start
-sudo service mongod status
+# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+# echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+# sudo apt-get update
+# sudo apt-get install -y mongodb-org
+# sudo service mongod start
+# sudo service mongod status
 
 # maven 
 sudo apt-get install maven -y
@@ -55,19 +58,10 @@ sudo apt-get install -y unace unrar zip unzip p7zip-full p7zip-rar sharutils rar
 # FileZilla - a FTP client
 sudo apt-get install -y filezilla
 
-# TLP - saves battery when Ubuntu is installed on Laptops
-sudo apt-get remove laptop-mode-tools
-sudo add-apt-repository ppa:linrunner/tlp
-sudo apt-get update
-sudo apt-get install -y tlp tlp-rdw smartmontools ethtool
-sudo tlp start
-sudo tlp stat
 
 # Erlang - Actor Concurrency Model based Programming Language
 sudo apt-get install -y erlang
 
-# Sticky Notes
-sudo apt-get install -y xpad
 
 # KVM acceleration and cpu checker
 sudo apt-get install -y cpu-checker
@@ -80,7 +74,7 @@ sudo apt-get install -y rpm
 sudo apt-get install -y alien dpkg-dev debhelper
 
 # Dictionary Client and Server with Thesaurus
-sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
+sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe" -y
 sudo apt-get install -y dict
 sudo apt-get install -y dictd
 sudo apt-get install -y dict-gcide
@@ -116,12 +110,13 @@ sh rustup-setup.sh -y
 rm rustup-setup.sh
 
 cargo install cargo-update
+cargo install bat
 
 # Anaconda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
-bash ~/miniconda.sh -b -p $HOME/miniconda
+bash ~/miniconda.sh -b -p $HOME/miniconda -u
 
-eval "$(${HOME}/anaconda/bin/conda shell.bash hook)"
+eval "$(${HOME}/miniconda/bin/conda shell.bash hook)"
 conda init
 conda config --set auto_activate_base false
 
@@ -139,6 +134,8 @@ sudo apt install bpytop
 curl -fsSL https://starship.rs/install.sh > /tmp/installStarship.sh
 sudo sh /tmp/installStarship.sh -y
 rm /tmp/installStarship.sh -f
+
+eval "$(starship init bash)"
 
 # Install app image launcher
 
