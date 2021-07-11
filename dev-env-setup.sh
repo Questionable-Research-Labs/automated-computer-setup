@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Installing apt essentials
-sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config cowsay
+sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config cowsay uuid-runtime
 
 # Clear apt cache
 sudo apt autoremove

@@ -84,7 +84,10 @@ echo "
 echo "Enter name of tempory user to delete, or just press enter to skip"
 read -p "temp user: " temp_user
 
-if [ $temp_user != ""]; then
-   sudo userdel $temp_user -f
-   sudo reboot
+if [[ $temp_user != ""]]; then
+   sudo userdel $temp_user -f -r
 fi
+
+echo "Press enter to reboot"
+read
+sudo reboot now

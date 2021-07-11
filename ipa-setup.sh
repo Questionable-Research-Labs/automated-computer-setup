@@ -5,17 +5,28 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# Prepend FreeIPA server to hosts
-echo "192.168.10.11 ipa.qrl.nz" > /tmp/newhost
-cat /etc/hosts >> /tmp/newhost
-cp /tmp/newhost /etc/hosts
+# Set hostname
+
+hostn=$(cat /etc/hostname)
+echo "Existing hostname is $hostn"
+
+# Hostname needs to be unique
+# EG: 7c68f0f4-e1dd-4b00-9e89-50a6679f90e1.ipa.qrl.nz
+newhost=$(uuidgen).ipa.qrl.nz
+
+#change hostname in /etc/hosts & /etc/hostname
+sudo sed -i "s/$hostn/$newhost/g" /etc/hosts
+sudo sed -i "s/$hostn/$newhost/g" /etc/hostname
+
+#display new hostname
+echo "Your new hostname is $newhost"
 
 # Run automatic IPA setup
 apt-get install freeipa-client -y
-ipa-client-install --hostname=`hostname -f` \
+ipa-client-install --hostname=$(cat /etc/hostname) \
     --mkhomedir \
     --server=ipa.qrl.nz \
-    --domain qrl.nz \
+    --domain ipa.qrl.nz \
     --realm QRL.NZ
 
 # Enable mkhomedir
