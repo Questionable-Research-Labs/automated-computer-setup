@@ -81,3 +81,10 @@ echo "
 ██████╔╝╚██████╔╝██║ ╚████║███████╗
 ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝                           
 "
+echo "Enter name of tempory user to delete, or just press enter to skip"
+read -p "temp user: " temp_user
+
+if [ $temp_user != ""]; then
+   sudo userdel $temp_user -f
+   sudo reboot
+fi

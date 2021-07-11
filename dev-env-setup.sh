@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Installing apt essentials
-sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config
+sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config cowsay
 
 # Clear apt cache
 sudo apt autoremove
@@ -127,7 +127,11 @@ sudo snap install vlc
 sudo snap install code --classic
 
 # bpytop
+pip install psutil
 sudo apt install bpytop
+
+# gitkraken
+sudo snap install gitkraken
 
 # Starship Prompt
 
