@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Installing apt essentials
-sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config cowsay uuid-runtime git
+sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config cowsay uuid-runtime git network-manager-openvpn network-manager-ssh network-manager-pptp proxychains
 
 # Clear apt cache
 sudo apt autoremove
@@ -123,21 +123,35 @@ sudo snap install code --classic
 # Blender
 sudo snap install blender --classic
 
+# Termius SSH
+sudo snap install termius-app
+
+# Bitwarden
+sudo snap install bitwarden
+
+# Gitkraken
+sudo snap install gitkraken
+
+# Discord
+sudo snap install discord
+sudo snap connect discord:system-observe
+
+# Brainfuck interpritor
+sudo snap install rust-bf
 # Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb
+rm -f ./google-chrome-stable_current_amd64.deb
 
 # Minecraft
-wget https://launcher.mojang.com/download/Minecraft.deb
+wget -O Minecraft.deb https://launcher.mojang.com/download/Minecraft.deb
 sudo apt install ./Minecraft.deb
+rm -f ./Minecraft.deb
 
 
 # bpytop
 pip install psutil
 sudo apt install bpytop
-
-# gitkraken
-sudo snap install gitkraken
 
 # Starship Prompt
 
