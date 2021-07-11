@@ -1,33 +1,21 @@
 #!/bin/bash
 
 # Installing apt essentials
-sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config cowsay uuid-runtime
+sudo apt-get install -y build-essential libssl-dev cowsay curl xclip gnome-keyring pkg-config cowsay uuid-runtime git
 
 # Clear apt cache
 sudo apt autoremove
 
-# Nodejs and NVM
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvmsudo
-nvm install 14.17.3
-nvm use 14.17.3
-node -v
+# Install Wine
+sudo dpkg --add-architecture i386
+wget -nc https://dl.winehq.org/wine-builds/winehq.key
+sudo apt-key add winehq.key
+
+sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ hirsute main' -y
+sudo apt update
+sudo apt install --install-recommends winehq-stable -y
 
 
-# Git - a version control system
-sudo apt-get update
-sudo apt-get install -y git
-
-# Yarn and usefull global packages
-npm install -g yarn
-yarn global add nodemon
-yarn global add loopback-cli
-yarn global add forever
-yarn global add ungit
-yarn global add gulp-cli
-yarn global add generator-angular-fullstack
-yarn global add caprover
 
 # Mongodb, Installing and starting server
 # sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
@@ -98,33 +86,51 @@ sudo apt-get install \
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 echo \
-"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
 $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup-setup.sh
-sh rustup-setup.sh -y
-rm rustup-setup.sh
+# Ardunio
+wget -O arduino-ide.zip https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-beta.9_Linux_64bit.zip
+sudo unzip -o arduino-ide.zip -d /tmp/
+sudo rm -rfd /usr/share/arduino/
+rm -rf arduino-ide.zip
+sudo mkdir /usr/share/arduino/
+sudo mv /tmp/arduino-ide_2.0.0-beta.9_Linux_64bit/* /usr/share/arduino/
 
-cargo install cargo-update
-cargo install bat
+wget -O /usr/share/arduino/logo.png https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Arduino_Logo.svg/1024px-Arduino_Logo.svg.png
 
-# Anaconda
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
-bash ~/miniconda.sh -b -p $HOME/miniconda -u
+sudo echo "[Desktop Entry]
+Encoding=UTF-8
+Version=2.0.0
+Type=Application
+Terminal=false
+Exec=/usr/share/arduino/arduino-ide
+Name=Arduino IDE
+Logo=/usr/share/arduino/logo.png" > /usr/share/applications/cc.arduino.idev2.desktop
 
-eval "$(${HOME}/miniconda/bin/conda shell.bash hook)"
-conda init
-conda config --set auto_activate_base false
+chmod -rw-r--r-- /usr/share/applications/cc.arduino.v2.desktop
+chmod -R 755 /usr/share/arduino/
 
 # VLC
 sudo snap install vlc
 
 # VSCode
 sudo snap install code --classic
+
+# Blender
+sudo snap install blender --classic
+
+# Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
+
+# Minecraft
+wget https://launcher.mojang.com/download/Minecraft.deb
+sudo apt install ./Minecraft.deb
+
 
 # bpytop
 pip install psutil
@@ -143,6 +149,6 @@ eval "$(starship init bash)"
 
 # Install app image launcher
 
-wget -O - https://github.com/TheAssassin/AppImageLauncher/releases/latest/download/appimagelauncher_2.2.0-travis995.0f91801.bionic_amd64.deb > /tmp/appimagelauncher.deb
+wget -O /tmp/appimagelauncher.deb https://github.com/TheAssassin/AppImageLauncher/releases/latest/download/appimagelauncher_2.2.0-travis995.0f91801.bionic_amd64.deb
 sudo apt install /tmp/appimagelauncher.deb -y
 rm /tmp/appimagelauncher.deb -f
