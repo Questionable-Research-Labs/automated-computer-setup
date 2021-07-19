@@ -98,7 +98,7 @@ sudo apt-get install -y dict-moby-thesaurus
 #touch ~/.gradle/gradle.properties && echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
 
 # Fish
-sudo apt install fish
+sudo apt install fish -y
 
 # Docker
 sudo apt-get install \
@@ -164,18 +164,18 @@ sudo snap connect discord:system-observe
 sudo snap install rust-bf
 # Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb -y
 rm -f ./google-chrome-stable_current_amd64.deb
 
 # Minecraft
 wget -O Minecraft.deb https://launcher.mojang.com/download/Minecraft.deb
-sudo apt install ./Minecraft.deb
+sudo apt install ./Minecraft.deb -y
 rm -f ./Minecraft.deb
 
 
 # bpytop
 pip install psutil
-sudo apt install bpytop
+sudo apt install bpytop -y
 
 # Starship Prompt
 
